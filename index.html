@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InterVia Decoration — Interior Design, Architecture & Fit-Out</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1C3246;
+    --navy-2:#152634;
+    --teal:#127677;
+    --teal-2:#0E5E5F;
+    --sand:#F2EEE4;
+    --sand-2:#E9E3D3;
+    --ink:#22201C;
+    --ink-soft:#5B5850;
+    --brass:#A9884F;
+    --white:#FFFFFF;
+    --line:rgba(28,50,70,0.16);
+    --ease-enter:cubic-bezier(0.22,1,0.36,1);
+    --ease-move:cubic-bezier(0.25,1,0.5,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--sand);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    letter-spacing:-0.01em;
+    color:var(--navy);
+  }
+  .mono{
+    font-family:'IBM Plex Mono',monospace;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{display:block;max-width:100%;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation:none !important;transition:none !important;}
+    .hero-bg{animation:none !important;transform:none !important;}
+  }
+
+  /* reveal-on-scroll */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity 500ms var(--ease-enter), transform 500ms var(--ease-enter);will-change:opacity,transform;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+  .reveal-stagger > *{opacity:0;transform:translateY(16px);transition:opacity 450ms var(--ease-enter), transform 450ms var(--ease-enter);will-change:opacity,transform;}
+  .reveal-stagger.in > *{opacity:1;transform:translateY(0);}
+  .reveal-stagger.in > *:nth-child(1){transition-delay:0ms;}
+  .reveal-stagger.in > *:nth-child(2){transition-delay:60ms;}
+  .reveal-stagger.in > *:nth-child(3){transition-delay:120ms;}
+  .reveal-stagger.in > *:nth-child(4){transition-delay:180ms;}
+  .reveal-stagger.in > *:nth-child(5){transition-delay:240ms;}
+  .reveal-stagger.in > *:nth-child(6){transition-delay:300ms;}
+
+  /* corner-bracket signature element */
+  .bracket{position:relative;}
+  .bracket::before,.bracket::after{
+    content:'';position:absolute;width:18px;height:18px;
+    border-color:var(--brass);border-style:solid;
+    transition:width 300ms var(--ease-enter), height 300ms var(--ease-enter);
+  }
+  .bracket::before{top:0;left:0;border-width:2px 0 0 2px;}
+  .bracket::after{bottom:0;right:0;border-width:0 2px 2px 0;}
+  .bracket:hover::before,.bracket:hover::after{width:28px;height:28px;}
+
+  /* ─── header ─── */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    background:rgba(242,238,228,0.9);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+    transform:translateY(0);
+    transition:transform 300ms var(--ease-move), background 300ms;
+    will-change:transform;
+  }
+  header.hide{transform:translateY(-100%);}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 32px;max-width:1180px;margin:0 auto;}
+  .logo-mark{height:34px;display:block;transition:transform 300ms var(--ease-enter);}
+  .logo-mark:hover{transform:scale(1.04);}
+  .navlinks{display:flex;gap:36px;font-size:13px;}
+  .navlinks a{position:relative;letter-spacing:0.04em;text-transform:uppercase;font-weight:500;color:var(--ink-soft);transition:color .2s;}
+  .navlinks a::after{
+    content:'';position:absolute;left:0;bottom:-4px;width:0;height:1px;background:var(--teal);
+    transition:width 250ms var(--ease-enter);
+  }
+  .navlinks a:hover{color:var(--teal);}
+  .navlinks a:hover::after{width:100%;}
+  .nav-cta{
+    padding:10px 22px;background:var(--navy);color:var(--white);font-size:13px;
+    letter-spacing:0.04em;text-transform:uppercase;border-radius:2px;
+    transition:background 200ms, transform 150ms var(--ease-enter);
+  }
+  .nav-cta:hover{background:var(--teal);}
+  .nav-cta:active{transform:scale(0.97);}
+
+  /* hamburger */
+  .menu-toggle{
+    display:none;font-size:26px;background:none;border:none;color:var(--navy);
+    cursor:pointer;width:44px;height:44px;align-items:center;justify-content:center;
+    transition:transform 200ms var(--ease-enter);
+  }
+  .menu-toggle:active{transform:scale(0.9);}
+
+  /* mobile overlay */
+  .mobile-overlay{
+    position:fixed;inset:0;z-index:60;
+    background:rgba(21,38,52,0.5);
+    opacity:0;visibility:hidden;
+    transition:opacity 300ms var(--ease-enter), visibility 0s 300ms;
+  }
+  .mobile-overlay.open{opacity:1;visibility:visible;transition:opacity 300ms var(--ease-enter), visibility 0s 0s;}
+
+  /* mobile nav drawer */
+  .mobile-nav{
+    position:fixed;top:0;right:0;bottom:0;z-index:70;
+    width:min(320px,85vw);background:var(--sand);
+    transform:translateX(100%);
+    transition:transform 350ms var(--ease-enter);
+    will-change:transform;
+    display:flex;flex-direction:column;
+    box-shadow:-8px 0 30px rgba(0,0,0,0.15);
+  }
+  .mobile-nav.open{transform:translateX(0);}
+  .mobile-nav-head{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 24px;border-bottom:1px solid var(--line);
+  }
+  .mobile-nav-head .logo-mark{height:28px;}
+  .mobile-nav-close{
+    width:40px;height:40px;display:flex;align-items:center;justify-content:center;
+    background:none;border:none;font-size:22px;color:var(--navy);cursor:pointer;
+    border-radius:50%;transition:background 200ms, transform 150ms var(--ease-enter);
+  }
+  .mobile-nav-close:hover{background:var(--line);}
+  .mobile-nav-close:active{transform:scale(0.9);}
+  .mobile-nav-links{
+    display:flex;flex-direction:column;padding:12px 0;flex:1;overflow-y:auto;
+  }
+  .mobile-nav-links a{
+    padding:16px 24px;font-size:15px;font-weight:500;letter-spacing:0.03em;
+    text-transform:uppercase;color:var(--ink-soft);
+    border-left:3px solid transparent;
+    transition:background 200ms, color 200ms, border-color 200ms, padding-left 250ms var(--ease-enter);
+  }
+  .mobile-nav-links a:hover,.mobile-nav-links a:focus{
+    background:rgba(18,118,119,0.06);color:var(--teal);
+    border-left-color:var(--teal);padding-left:28px;
+  }
+  .mobile-nav-cta{
+    padding:16px 24px;border-top:1px solid var(--line);
+  }
+  .mobile-nav-cta a{
+    display:block;text-align:center;padding:14px 22px;
+    background:var(--teal);color:var(--white);font-size:13px;
+    letter-spacing:0.04em;text-transform:uppercase;border-radius:2px;
+    font-weight:500;transition:background 200ms, transform 150ms var(--ease-enter);
+  }
+  .mobile-nav-cta a:hover{background:var(--teal-2);}
+  .mobile-nav-cta a:active{transform:scale(0.97);}
+
+  /* stagger children in mobile nav */
+  .mobile-nav.open .mobile-nav-links a{
+    animation:mobileNavItem 300ms var(--ease-enter) both;
+  }
+  .mobile-nav.open .mobile-nav-links a:nth-child(1){animation-delay:80ms;}
+  .mobile-nav.open .mobile-nav-links a:nth-child(2){animation-delay:120ms;}
+  .mobile-nav.open .mobile-nav-links a:nth-child(3){animation-delay:160ms;}
+  .mobile-nav.open .mobile-nav-links a:nth-child(4){animation-delay:200ms;}
+  .mobile-nav.open .mobile-nav-links a:nth-child(5){animation-delay:240ms;}
+  .mobile-nav.open .mobile-nav-cta a{animation:mobileNavItem 300ms var(--ease-enter) 300ms both;}
+  @keyframes mobileNavItem{from{opacity:0;transform:translateX(20px);}to{opacity:1;transform:none;}}
+
+  /* body scroll lock when mobile nav open */
+  body.nav-open{overflow:hidden;}
+
+  /* ─── hero ─── */
+  .hero{
+    position:relative;padding:190px 32px 120px;
+    background:var(--navy);color:var(--sand);
+    overflow:hidden;
+  }
+  .hero-bg{
+    position:absolute;inset:0;
+    background-image:url('assets/hero-villa.jpg');
+    background-size:cover;background-position:center 30%;
+    animation:heroZoom 18s ease-out forwards;
+    will-change:transform;
+  }
+  @keyframes heroZoom{from{transform:scale(1.08);}to{transform:scale(1);}}
+  .hero-overlay{
+    position:absolute;inset:0;
+    background:linear-gradient(100deg, rgba(21,38,52,0.94) 0%, rgba(21,38,52,0.86) 38%, rgba(21,38,52,0.55) 68%, rgba(21,38,52,0.35) 100%);
+  }
+  .hero-inner{position:relative;max-width:1180px;margin:0 auto;}
+  .hero .eyebrow{
+    font-size:12px;color:var(--brass);margin-bottom:22px;display:flex;align-items:center;gap:12px;
+    opacity:0;animation:heroFadeUp 600ms var(--ease-enter) 100ms forwards;
+  }
+  .hero .eyebrow::before{content:'';width:34px;height:1px;background:var(--brass);}
+  .hero h1{
+    font-size:clamp(40px,6vw,74px);line-height:1.05;color:var(--white);max-width:900px;
+    opacity:0;animation:heroFadeUp 700ms var(--ease-enter) 220ms forwards;
+  }
+  .hero h1 em{font-style:italic;color:var(--teal);font-weight:400;}
+  .hero p{
+    margin-top:26px;max-width:560px;font-size:17px;color:rgba(242,238,228,0.78);
+    opacity:0;animation:heroFadeUp 700ms var(--ease-enter) 380ms forwards;
+  }
+  .hero-actions{display:flex;gap:16px;margin-top:42px;flex-wrap:wrap;
+    opacity:0;animation:heroFadeUp 700ms var(--ease-enter) 500ms forwards;
+  }
+  @keyframes heroFadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+  .btn-primary{
+    background:var(--teal);color:var(--white);padding:15px 30px;font-size:14px;
+    letter-spacing:0.03em;text-transform:uppercase;border-radius:2px;font-weight:500;
+    transition:background 220ms, transform 150ms var(--ease-enter);
+    display:inline-block;
+  }
+  .btn-primary:hover{background:var(--teal-2);transform:translateY(-2px);}
+  .btn-primary:active{transform:translateY(0) scale(0.98);}
+  .btn-ghost{
+    border:1px solid rgba(242,238,228,0.4);color:var(--sand);padding:15px 30px;font-size:14px;
+    letter-spacing:0.03em;text-transform:uppercase;border-radius:2px;font-weight:500;
+    transition:border-color 220ms, color 220ms, transform 150ms var(--ease-enter);
+  }
+  .btn-ghost:hover{border-color:var(--brass);color:var(--brass);transform:translateY(-2px);}
+  .btn-ghost:active{transform:translateY(0) scale(0.98);}
+
+  .hero-stats{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:80px;
+    background:rgba(242,238,228,0.14);border:1px solid rgba(242,238,228,0.14);
+    opacity:0;animation:heroFadeUp 700ms var(--ease-enter) 620ms forwards;
+  }
+  .hero-stats div{background:var(--navy);padding:24px 20px;transition:background 250ms;transition:transform 200ms var(--ease-enter);}
+  .hero-stats div:hover{background:var(--navy-2);}
+  .hero-stats .num{font-family:'Fraunces',serif;font-size:32px;color:var(--white);}
+  .hero-stats .label{font-size:12px;color:rgba(242,238,228,0.6);margin-top:6px;text-transform:uppercase;letter-spacing:0.04em;}
+
+  /* ─── section shell ─── */
+  section{padding:110px 0;}
+  .section-head{max-width:640px;margin-bottom:64px;}
+  .section-head .tag{font-size:12px;color:var(--teal);margin-bottom:14px;display:flex;align-items:center;gap:12px;}
+  .section-head .tag::before{content:'';width:26px;height:1px;background:var(--teal);}
+  .section-head h2{font-size:clamp(28px,3.6vw,42px);}
+  .section-head p{margin-top:16px;color:var(--ink-soft);font-size:16px;max-width:540px;}
+
+  /* ─── about ─── */
+  .about{background:var(--white);}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:start;}
+  .about-copy p{color:var(--ink-soft);margin-bottom:18px;font-size:16px;}
+  .locations{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:34px;}
+  .locations div{
+    border:1px solid var(--line);padding:16px 18px;font-size:13px;
+    transition:border-color 220ms, transform 220ms var(--ease-enter);
+  }
+  .locations div:hover{border-color:var(--teal);transform:translateY(-3px);}
+  .locations .code{color:var(--teal);font-size:11px;display:block;margin-bottom:4px;}
+  .about-img{aspect-ratio:4/5;overflow:hidden;border:1px solid var(--line);}
+  .about-img img{width:100%;height:100%;object-fit:cover;transition:transform 500ms var(--ease-enter);}
+  .about-img:hover img{transform:scale(1.05);}
+
+  /* ─── services ─── */
+  .services{background:var(--sand);}
+  .service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  .service-card{background:var(--sand);padding:38px 32px;transition:background 250ms, transform 250ms var(--ease-enter);will-change:transform;}
+  .service-card:hover{background:var(--white);transform:translateY(-4px);}
+  .service-card .idx{font-size:12px;color:var(--brass);margin-bottom:20px;display:block;}
+  .service-card h3{font-size:19px;margin-bottom:12px;}
+  .service-card p{font-size:14px;color:var(--ink-soft);}
+
+  /* ─── portfolio ─── */
+  .portfolio{background:var(--navy);color:var(--sand);}
+  .portfolio .section-head h2{color:var(--white);}
+  .portfolio .section-head p{color:rgba(242,238,228,0.68);}
+  .portfolio .section-head .tag{color:var(--brass);}
+  .portfolio .section-head .tag::before{background:var(--brass);}
+  .proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;}
+  .proj-card{border:1px solid rgba(242,238,228,0.14);transition:border-color 250ms, transform 300ms var(--ease-enter);will-change:transform;}
+  .proj-card:hover{border-color:var(--teal);transform:translateY(-6px);}
+  .proj-img{
+    aspect-ratio:16/10;overflow:hidden;
+    border-bottom:1px solid rgba(242,238,228,0.14);
+  }
+  .proj-img img{width:100%;height:100%;object-fit:cover;transition:transform 500ms var(--ease-enter);will-change:transform;}
+  .proj-card:hover .proj-img img{transform:scale(1.06);}
+  .proj-body{padding:24px 26px;}
+  .proj-body .sheet{font-size:11px;color:var(--teal);display:block;margin-bottom:8px;}
+  .proj-body h3{color:var(--white);font-size:19px;margin-bottom:8px;}
+  .proj-body p{font-size:14px;color:rgba(242,238,228,0.65);}
+
+  /* ─── why ─── */
+  .why{background:var(--white);}
+  .why-list{display:flex;flex-direction:column;}
+  .why-row{
+    display:grid;grid-template-columns:80px 1fr;gap:26px;padding:26px 0;
+    border-top:1px solid var(--line);align-items:baseline;
+    transition:padding-left 250ms var(--ease-enter);
+  }
+  .why-row:hover{padding-left:10px;}
+  .why-list .why-row:last-child{border-bottom:1px solid var(--line);}
+  .why-row .code{font-family:'IBM Plex Mono',monospace;color:var(--brass);font-size:13px;}
+  .why-row h3{font-size:19px;margin-bottom:8px;}
+  .why-row p{color:var(--ink-soft);font-size:15px;max-width:600px;}
+
+  /* ─── process ─── */
+  .process{background:var(--sand-2);}
+  .process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);position:relative;}
+  .process-card{
+    background:var(--sand-2);padding:34px 26px;position:relative;
+    transition:background 250ms, transform 250ms var(--ease-enter);will-change:transform;
+  }
+  .process-card:hover{background:var(--white);transform:translateY(-4px);}
+  .process-card .step{
+    font-family:'Fraunces',serif;font-size:34px;color:var(--brass);margin-bottom:18px;display:block;
+  }
+  .process-card h3{font-size:17px;margin-bottom:10px;}
+  .process-card p{font-size:13px;color:var(--ink-soft);}
+  .process-card:not(:last-child)::after{
+    content:'';position:absolute;top:50%;right:-1px;width:14px;height:1px;background:var(--brass);
+    transform:translateY(-50%);z-index:2;
+  }
+
+  /* ─── contact ─── */
+  .contact{background:var(--navy);color:var(--sand);}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;}
+  .contact .section-head h2{color:var(--white);}
+  .contact .section-head .tag{color:var(--brass);}
+  .contact .section-head .tag::before{background:var(--brass);}
+  .field{margin-bottom:18px;}
+  .field label{display:block;font-size:12px;color:rgba(242,238,228,0.6);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.04em;}
+  .field input,.field textarea{
+    width:100%;background:transparent;border:none;border-bottom:1px solid rgba(242,238,228,0.3);
+    color:var(--white);padding:10px 0;font-size:15px;font-family:'Inter',sans-serif;
+    transition:border-color 220ms;
+  }
+  .field input:focus,.field textarea:focus{outline:none;border-color:var(--teal);}
+  .field textarea{resize:vertical;min-height:80px;}
+  .contact-info div{margin-bottom:28px;}
+  .contact-info .label{font-size:12px;color:var(--brass);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:8px;}
+  .contact-info p, .contact-info a{font-size:15px;color:rgba(242,238,228,0.85);transition:color 200ms;}
+  .contact-info a:hover{color:var(--teal);}
+  .social-row{display:flex;gap:16px;margin-top:10px;}
+  .social-row a{
+    width:38px;height:38px;border:1px solid rgba(242,238,228,0.3);display:flex;
+    align-items:center;justify-content:center;font-size:13px;
+    transition:border-color 200ms ease, color 200ms ease, transform 200ms var(--ease-enter);
+    will-change:transform;
+  }
+  .social-row a:hover{border-color:var(--teal);color:var(--teal);transform:translateY(-3px);}
+
+  .whatsapp-float{
+    position:fixed;bottom:28px;right:28px;z-index:999;
+    width:56px;height:56px;border-radius:50%;
+    background:#25D366;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 4px 14px rgba(37,211,102,0.45);
+    transition:transform 220ms var(--ease-enter),box-shadow 220ms;
+    animation:whatsappIn 500ms var(--ease-enter) 1.2s both;
+    will-change:transform;
+  }
+  @keyframes whatsappIn{from{opacity:0;transform:scale(0.5) translateY(20px);}to{opacity:1;transform:scale(1) translateY(0);}}
+  .whatsapp-float:hover{transform:scale(1.1);box-shadow:0 6px 20px rgba(37,211,102,0.6);}
+  .whatsapp-float:active{transform:scale(0.95);}
+  .whatsapp-float svg{fill:#fff;}
+
+  footer{background:var(--navy-2);color:rgba(242,238,228,0.5);padding:30px 0;font-size:13px;}
+  .footer-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+
+  /* ─── touch device guard ─── */
+  @media(hover:none){
+    .about-img:hover img, .proj-card:hover .proj-img img, .proj-card:hover, .service-card:hover, .process-card:hover, .locations div:hover{transform:none;}
+    .navlinks a:hover::after{width:0;}
+    .bracket:hover::before,.bracket:hover::after{width:18px;height:18px;}
+    .logo-mark:hover{transform:none;}
+  }
+
+  /* ═══════════════════════════════════════
+     RESPONSIVE — Tablet (max-width: 1024px)
+     ═══════════════════════════════════════ */
+  @media(max-width:1024px){
+    .wrap{padding:0 24px;}
+    section{padding:90px 0;}
+    .section-head{margin-bottom:48px;}
+    .about-grid{gap:48px;}
+    .service-grid{grid-template-columns:repeat(2,1fr);}
+    .proj-grid{gap:20px;}
+    .contact-grid{gap:48px;}
+    .hero{padding:170px 24px 100px;}
+    .hero-stats{margin-top:60px;}
+  }
+
+  /* ═══════════════════════════════════════
+     RESPONSIVE — Tablet portrait (max-width: 860px)
+     ═══════════════════════════════════════ */
+  @media(max-width:860px){
+    .navlinks,.nav-cta{display:none;}
+    .menu-toggle{display:flex;}
+    .about-grid,.contact-grid{grid-template-columns:1fr;}
+    .about-grid{gap:40px;}
+    .service-grid{grid-template-columns:1fr 1fr;}
+    .proj-grid{grid-template-columns:1fr 1fr;gap:20px;}
+    .process-grid{grid-template-columns:repeat(2,1fr);}
+    .process-card:not(:last-child)::after{display:none;}
+    .hero-stats{grid-template-columns:repeat(2,1fr);}
+    .why-row{grid-template-columns:60px 1fr;gap:18px;}
+    .hero{padding:160px 24px 90px;}
+    .hero h1{font-size:clamp(36px,5vw,58px);}
+    .hero p{font-size:16px;}
+    section{padding:80px 0;}
+  }
+
+  /* ═══════════════════════════════════════
+     RESPONSIVE — Mobile (max-width: 600px)
+     ═══════════════════════════════════════ */
+  @media(max-width:600px){
+    .wrap{padding:0 20px;}
+    .nav{padding:12px 20px;}
+    .logo-mark{height:28px;}
+    section{padding:64px 0;}
+    .section-head{margin-bottom:36px;}
+    .section-head h2{font-size:clamp(24px,6vw,32px);}
+    .section-head p{font-size:15px;}
+
+    /* hero mobile */
+    .hero{padding:140px 20px 70px;}
+    .hero h1{font-size:clamp(30px,8vw,44px);line-height:1.1;}
+    .hero p{font-size:15px;margin-top:20px;}
+    .hero-actions{margin-top:32px;flex-direction:column;gap:12px;}
+    .hero-actions .btn-primary,.hero-actions .btn-ghost{width:100%;text-align:center;padding:14px 20px;}
+    .hero-stats{grid-template-columns:1fr 1fr;margin-top:48px;}
+    .hero-stats div{padding:18px 16px;}
+    .hero-stats .num{font-size:26px;}
+
+    /* about mobile */
+    .about-img{aspect-ratio:16/10;}
+    .locations{grid-template-columns:1fr;gap:10px;}
+
+    /* services mobile */
+    .service-grid{grid-template-columns:1fr;}
+    .service-card{padding:28px 22px;}
+
+    /* portfolio mobile */
+    .proj-grid{grid-template-columns:1fr;gap:16px;}
+    .proj-body{padding:18px 20px;}
+    .proj-body h3{font-size:17px;}
+
+    /* why mobile */
+    .why-row{grid-template-columns:1fr;gap:8px;padding:20px 0;}
+    .why-row .code{font-size:12px;}
+    .why-row h3{font-size:17px;}
+    .why-row p{font-size:14px;}
+
+    /* process mobile */
+    .process-grid{grid-template-columns:1fr;}
+    .process-card{padding:28px 22px;}
+
+    /* contact mobile */
+    .field input,.field textarea{font-size:16px;}
+
+    /* footer mobile */
+    .footer-row{flex-direction:column;text-align:center;gap:8px;}
+
+    /* whatsapp mobile */
+    .whatsapp-float{width:50px;height:50px;bottom:20px;right:20px;}
+    .whatsapp-float svg{width:24px;height:24px;}
+  }
+
+  /* ═══════════════════════════════════════
+     RESPONSIVE — Small mobile (max-width: 380px)
+     ═══════════════════════════════════════ */
+  @media(max-width:380px){
+    .hero{padding:130px 16px 60px;}
+    .hero h1{font-size:28px;}
+    .hero-stats{grid-template-columns:1fr;}
+    .hero-stats .num{font-size:24px;}
+    .btn-primary,.btn-ghost{padding:13px 22px;font-size:13px;}
+  }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <nav class="nav">
+    <img src="assets/logo.png" alt="InterVia Design" class="logo-mark">
+    <div class="navlinks">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#process">Process</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="#contact" class="nav-cta">Request a quote</a>
+    <button class="menu-toggle" id="menuOpen" aria-label="Open menu">&#9776;</button>
+  </nav>
+</header>
+
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<div class="mobile-nav" id="mobileNav">
+  <div class="mobile-nav-head">
+    <img src="assets/logo.png" alt="InterVia Design" class="logo-mark">
+    <button class="mobile-nav-close" id="menuClose" aria-label="Close menu">&times;</button>
+  </div>
+  <div class="mobile-nav-links">
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#portfolio">Portfolio</a>
+    <a href="#process">Process</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="mobile-nav-cta">
+    <a href="#contact">Request a quote</a>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-inner">
+    <div class="eyebrow mono">Doha · Qatar — regional fit-out & design</div>
+    <h1>From concept drawing<br>to <em>handover key</em>.</h1>
+    <p>InterVia Decoration designs, builds, and delivers interiors, architecture, and fit-out projects end to end — for clients across Qatar, Saudi Arabia, the UAE, and beyond.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Request a quote</a>
+      <a href="#portfolio" class="btn-ghost">View our work</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="num">6</div><div class="label">Countries</div></div>
+      <div><div class="num">100+</div><div class="label">Projects delivered</div></div>
+      <div><div class="num">1</div><div class="label">Team, full lifecycle</div></div>
+      <div><div class="num">3</div><div class="label">Disciplines, one team</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap about-grid">
+    <div class="about-copy reveal">
+      <div class="section-head" style="margin-bottom:36px;">
+        <div class="tag mono">About InterVia</div>
+        <h2>One team, every stage of the project.</h2>
+      </div>
+      <p>InterVia Decoration is a full-service interior design, architecture, and fit-out firm headquartered in Doha, with a distributed team working across Qatar, Egypt, Saudi Arabia, the UAE, the UK, and the US.</p>
+      <p>We take projects from first sketch through construction and final handover — design, engineering, procurement, and site execution under one roof, so clients manage one relationship instead of five contractors.</p>
+      <div class="locations">
+        <div><span class="code mono">HQ</span>Doha, Qatar</div>
+        <div><span class="code mono">Delivery</span>Saudi Arabia · UAE</div>
+        <div><span class="code mono">Studio</span>Egypt</div>
+        <div><span class="code mono">Advisory</span>UK · US</div>
+      </div>
+    </div>
+    <div class="about-img bracket reveal">
+      <img src="assets/about-intervia.jpg" alt="InterVia Lusail project interior">
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="tag mono">What we do</div>
+      <h2>Services across the full build lifecycle.</h2>
+      <p>Every service below can run standalone, or as part of one continuous, managed delivery.</p>
+    </div>
+    <div class="service-grid reveal-stagger">
+      <div class="service-card"><span class="idx mono">01 — Design</span><h3>Interior design</h3><p>Residential, commercial, and hospitality interiors, from concept to finish specification.</p></div>
+      <div class="service-card"><span class="idx mono">02 — Design</span><h3>Architecture & space planning</h3><p>Spatial strategy and architectural drawings that carry through to construction.</p></div>
+      <div class="service-card"><span class="idx mono">03 — Build</span><h3>Fit-out & construction</h3><p>Execution on site, from structural works to final finishes and inspection.</p></div>
+      <div class="service-card"><span class="idx mono">04 — Manage</span><h3>Project management</h3><p>Single point of accountability from design sign-off through to handover.</p></div>
+      <div class="service-card"><span class="idx mono">05 — Build</span><h3>Camps & facilities</h3><p>Camp construction and expansion for workforce and operational sites.</p></div>
+      <div class="service-card"><span class="idx mono">06 — Build</span><h3>Sports facilities</h3><p>Football pitches and recreational facilities, built to specification.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="portfolio" id="portfolio">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="tag mono">Selected work</div>
+      <h2>Projects on the ground.</h2>
+      <p>A sample of recent design and fit-out work delivered across the region.</p>
+    </div>
+    <div class="proj-grid reveal-stagger">
+      <div class="proj-card">
+        <div class="proj-img"><img src="assets/proj1.jpg" alt="Interior fit-out project render"></div>
+        <div class="proj-body">
+          <span class="sheet mono">Sheet P0293</span>
+          <h3>Residential interior fit-out</h3>
+          <p>Full interior design and fit-out execution, from concept to finished space.</p>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-img"><img src="assets/proj2.jpg" alt="Interior design project render"></div>
+        <div class="proj-body">
+          <span class="sheet mono">Sheet P0296</span>
+          <h3>Commercial interior design</h3>
+          <p>Space planning and interior design delivered for a commercial client.</p>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-img"><img src="assets/proj3.jpg" alt="Interior architecture project render"></div>
+        <div class="proj-body">
+          <span class="sheet mono">Sheet P0310</span>
+          <h3>Architecture & interiors</h3>
+          <p>Combined architectural and interior scope, delivered as a single project.</p>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-img"><img src="assets/proj4.jpg" alt="Exterior architecture render"></div>
+        <div class="proj-body">
+          <span class="sheet mono">Sheet —</span>
+          <h3>Exterior & facade design</h3>
+          <p>Architectural facade design as part of a full-scope build.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="why">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="tag mono">Why InterVia</div>
+      <h2>What clients get working with us.</h2>
+    </div>
+    <div class="why-list reveal-stagger">
+      <div class="why-row"><span class="code mono">01</span><div><h3>Regional reach</h3><p>An established base in Qatar with active delivery capability across Saudi Arabia, the UAE, and Kuwait.</p></div></div>
+      <div class="why-row"><span class="code mono">02</span><div><h3>Full turnkey execution</h3><p>Design, procurement, and construction managed as one process — not handed between separate vendors.</p></div></div>
+      <div class="why-row"><span class="code mono">03</span><div><h3>Multi-country team</h3><p>Design, engineering, and delivery talent working across six countries in a shared timezone-aware workflow.</p></div></div>
+      <div class="why-row"><span class="code mono">04</span><div><h3>Built for scale</h3><p>From single commercial interiors to multi-building camp construction, sized to the scope of the project.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="process" id="process">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="tag mono">How we work</div>
+      <h2>One process, start to finish.</h2>
+      <p>The same team carries the project through every stage below — no handoff between separate vendors.</p>
+    </div>
+    <div class="process-grid reveal-stagger">
+      <div class="process-card">
+        <span class="step">01</span>
+        <h3>Design</h3>
+        <p>Concept, space planning, and architectural drawings.</p>
+      </div>
+      <div class="process-card">
+        <span class="step">02</span>
+        <h3>Procurement</h3>
+        <p>Materials, finishes, and vendors sourced and confirmed.</p>
+      </div>
+      <div class="process-card">
+        <span class="step">03</span>
+        <h3>Construction</h3>
+        <p>On-site execution, from structural works to finishes.</p>
+      </div>
+      <div class="process-card">
+        <span class="step">04</span>
+        <h3>Handover</h3>
+        <p>Final inspection, snagging, and key handover to the client.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap contact-grid">
+    <div class="reveal">
+      <div class="section-head">
+        <div class="tag mono">Get in touch</div>
+        <h2>Start a project with us.</h2>
+      </div>
+      <form>
+        <div class="field"><label>Name</label><input type="text" placeholder="Your full name"></div>
+        <div class="field"><label>Email</label><input type="email" placeholder="name@company.com"></div>
+        <div class="field"><label>Project details</label><textarea placeholder="Tell us about the project"></textarea></div>
+        <a href="#" class="btn-primary" style="display:inline-block;margin-top:8px;">Send message</a>
+      </form>
+    </div>
+    <div class="contact-info reveal">
+      <div><div class="label mono">Office</div><p>Doha, Qatar</p></div>
+      <div><div class="label mono">Email</div><a href="mailto:info@interviadeco.com">info@interviadeco.com</a></div>
+      <div><div class="label mono">Phone</div><p>+974 5070 4704</p></div>
+      <div>
+        <div class="label mono">Follow</div>
+        <div class="social-row">
+          <a href="https://www.instagram.com/intervia_deco/" aria-label="Instagram" target="_blank" rel="noopener">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/company/intervia-design" aria-label="LinkedIn" target="_blank" rel="noopener">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61578378476590" aria-label="Facebook" target="_blank" rel="noopener">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-row">
+    <div>© 2026 InterVia Decoration. All rights reserved.</div>
+    <div>Doha · Cairo · Riyadh · Dubai · London · New York</div>
+  </div>
+</footer>
+
+<a href="https://wa.me/97450704704" class="whatsapp-float" aria-label="Chat on WhatsApp" target="_blank" rel="noopener">
+  <svg width="28" height="28" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+  var header = document.getElementById('siteHeader');
+  var heroBg = document.querySelector('.hero-bg');
+  var menuOpen = document.getElementById('menuOpen');
+  var menuClose = document.getElementById('menuClose');
+  var mobileOverlay = document.getElementById('mobileOverlay');
+  var mobileNav = document.getElementById('mobileNav');
+  var lastY = window.scrollY;
+  var ticking = false;
+
+  function openMenu(){
+    mobileNav.classList.add('open');
+    mobileOverlay.classList.add('open');
+    document.body.classList.add('nav-open');
+    menuOpen.setAttribute('aria-expanded','true');
+  }
+  function closeMenu(){
+    mobileNav.classList.remove('open');
+    mobileOverlay.classList.remove('open');
+    document.body.classList.remove('nav-open');
+    menuOpen.setAttribute('aria-expanded','false');
+  }
+  menuOpen.addEventListener('click',openMenu);
+  menuClose.addEventListener('click',closeMenu);
+  mobileOverlay.addEventListener('click',closeMenu);
+
+  mobileNav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(){ closeMenu(); });
+  });
+
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape' && mobileNav.classList.contains('open')){ closeMenu(); }
+  });
+
+  window.addEventListener('scroll',function(){
+    var y = window.scrollY;
+    if(y > lastY && y > 140){ header.classList.add('hide'); }
+    else{ header.classList.remove('hide'); }
+    lastY = y;
+    if(!ticking){
+      requestAnimationFrame(function(){
+        if(heroBg && y < 800){
+          heroBg.style.transform = 'scale(1) translateY(' + (y * 0.15) + 'px)';
+        }
+        ticking = false;
+      });
+      ticking = true;
+    }
+  },{passive:true});
+
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  },{threshold:0.1, rootMargin:'0px 0px -30px 0px'});
+  document.querySelectorAll('.reveal, .reveal-stagger').forEach(function(el){ io.observe(el); });
+</script>
+
+</body>
+</html>
