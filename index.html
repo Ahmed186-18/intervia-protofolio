@@ -442,8 +442,9 @@
     .hero-stats .num{font-size:26px;}
 
     /* about mobile */
-    .about-img{aspect-ratio:16/10;}
-    .locations{grid-template-columns:1fr;gap:10px;}
+    .about-img{aspect-ratio:3/2;}
+    .about-img::before,.about-img::after{width:14px;height:14px;}
+    .locations{grid-template-columns:1fr 1fr;gap:10px;}
 
     /* services mobile */
     .service-grid{grid-template-columns:1fr;}
@@ -484,6 +485,8 @@
     .hero-stats{grid-template-columns:1fr;}
     .hero-stats .num{font-size:24px;}
     .btn-primary,.btn-ghost{padding:13px 22px;font-size:13px;}
+    .about-img{aspect-ratio:16/9;}
+    .locations{grid-template-columns:1fr;}
   }
 </style>
 </head>
@@ -526,7 +529,7 @@
   <div class="hero-bg"></div>
   <div class="hero-overlay"></div>
   <div class="hero-inner">
-    <div class="eyebrow mono">Doha · Qatar — regional fit-out & design</div>
+    <div class="eyebrow mono">Qatar · Global — architecture, engineering & fit-out</div>
     <h1>From concept drawing<br>to <em>handover key</em>.</h1>
     <p>InterVia Decoration designs, builds, and delivers interiors, architecture, and fit-out projects end to end — for clients across Qatar, Saudi Arabia, the UAE, and beyond.</p>
     <div class="hero-actions">
@@ -537,7 +540,7 @@
       <div><div class="num">6</div><div class="label">Countries</div></div>
       <div><div class="num">100+</div><div class="label">Projects delivered</div></div>
       <div><div class="num">1</div><div class="label">Team, full lifecycle</div></div>
-      <div><div class="num">3</div><div class="label">Disciplines, one team</div></div>
+      <div><div class="num">11</div><div class="label">Services, one team</div></div>
     </div>
   </div>
 </section>
@@ -552,10 +555,12 @@
       <p>InterVia Decoration is a full-service interior design, architecture, and fit-out firm headquartered in Doha, with a distributed team working across Qatar, Egypt, Saudi Arabia, the UAE, the UK, and the US.</p>
       <p>We take projects from first sketch through construction and final handover — design, engineering, procurement, and site execution under one roof, so clients manage one relationship instead of five contractors.</p>
       <div class="locations">
-        <div><span class="code mono">HQ</span>Doha, Qatar</div>
-        <div><span class="code mono">Delivery</span>Saudi Arabia · UAE</div>
+        <div><span class="code mono">HQ</span>Qatar</div>
+        <div><span class="code mono">Regional</span>UAE</div>
         <div><span class="code mono">Studio</span>Egypt</div>
-        <div><span class="code mono">Advisory</span>UK · US</div>
+        <div><span class="code mono">Regional</span>Palestine</div>
+        <div><span class="code mono">Advisory</span>UK</div>
+        <div><span class="code mono">Advisory</span>USA</div>
       </div>
     </div>
     <div class="about-img bracket reveal">
@@ -569,15 +574,20 @@
     <div class="section-head reveal">
       <div class="tag mono">What we do</div>
       <h2>Services across the full build lifecycle.</h2>
-      <p>Every service below can run standalone, or as part of one continuous, managed delivery.</p>
+      <p>Full-spectrum engineering, design, and delivery services — from first concept through construction and handover.</p>
     </div>
     <div class="service-grid reveal-stagger">
-      <div class="service-card"><span class="idx mono">01 — Design</span><h3>Interior design</h3><p>Residential, commercial, and hospitality interiors, from concept to finish specification.</p></div>
-      <div class="service-card"><span class="idx mono">02 — Design</span><h3>Architecture & space planning</h3><p>Spatial strategy and architectural drawings that carry through to construction.</p></div>
-      <div class="service-card"><span class="idx mono">03 — Build</span><h3>Fit-out & construction</h3><p>Execution on site, from structural works to final finishes and inspection.</p></div>
-      <div class="service-card"><span class="idx mono">04 — Manage</span><h3>Project management</h3><p>Single point of accountability from design sign-off through to handover.</p></div>
-      <div class="service-card"><span class="idx mono">05 — Build</span><h3>Camps & facilities</h3><p>Camp construction and expansion for workforce and operational sites.</p></div>
-      <div class="service-card"><span class="idx mono">06 — Build</span><h3>Sports facilities</h3><p>Football pitches and recreational facilities, built to specification.</p></div>
+      <div class="service-card"><span class="idx mono">01 — Design</span><h3>Architecture Design</h3><p>Concept development, schematic design, and construction documentation for residential, commercial, and institutional projects.</p></div>
+      <div class="service-card"><span class="idx mono">02 — Design</span><h3>Interior Design</h3><p>Space planning, material specification, and finish selection for residential, commercial, and hospitality interiors.</p></div>
+      <div class="service-card"><span class="idx mono">03 — Engineering</span><h3>Structural Analysis and Design</h3><p>Structural calculations, member sizing, and detailed drawings for reinforced concrete and steel structures.</p></div>
+      <div class="service-card"><span class="idx mono">04 — Engineering</span><h3>Value Engineering & Feasibility</h3><p>Cost optimization and technical analysis to maximize project value without compromising quality or performance.</p></div>
+      <div class="service-card"><span class="idx mono">05 — Infrastructure</span><h3>Road and Pavement Design</h3><p>Horizontal and vertical alignment, pavement structure design, and drainage for roads and access networks.</p></div>
+      <div class="service-card"><span class="idx mono">06 — Planning</span><h3>Urban Planning</h3><p>Master planning, land-use strategy, and site layout for large-scale developments and communities.</p></div>
+      <div class="service-card"><span class="idx mono">07 — Documentation</span><h3>Shop Drawing Production</h3><p>Detailed fabrication and installation drawings coordinated with structural, architectural, and MEP disciplines.</p></div>
+      <div class="service-card"><span class="idx mono">08 — Build</span><h3>Fit-Out Works and Execution</h3><p>On-site delivery of interior fit-out from partitioning and ceilings to joinery, finishes, and handover.</p></div>
+      <div class="service-card"><span class="idx mono">09 — Manage</span><h3>Project Planning & Design Management</h3><p>Programme development, design coordination, and milestone tracking from concept through construction.</p></div>
+      <div class="service-card"><span class="idx mono">10 — Engineering</span><h3>Engineering Design & Innovation</h3><p>Cross-disciplinary engineering integration and creative problem-solving for complex project requirements.</p></div>
+      <div class="service-card"><span class="idx mono">11 — Technology</span><h3>Building Information Modeling</h3><p>3D modeling, clash detection, and LOD 300–500 deliverables across all project phases.</p></div>
     </div>
   </div>
 </section>
@@ -712,7 +722,7 @@
 <footer>
   <div class="wrap footer-row">
     <div>© 2026 InterVia Decoration. All rights reserved.</div>
-    <div>Doha · Cairo · Riyadh · Dubai · London · New York</div>
+    <div>Qatar · UAE · Egypt · Palestine · UK · USA</div>
   </div>
 </footer>
 
